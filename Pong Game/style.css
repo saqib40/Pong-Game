@@ -1,41 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
-  width: 100vw;
-}
-
-.container {
-  height: 90vh;
-  width: 50vw;
-  background-color: black;
-  margin: 5vh auto;
-}
-
-@keyframes computerMovement {
-  from {
-    margin-left: 0vw;
-  }
-  to {
-    margin-left: 45vw;
-  }
-}
-.computer {
-  height: 2.5vh;
-  width: 5vw;
-  background-color: white;
-  border: 1px solid;
-  animation: computerMovement 2s linear infinite alternate;
-}
-
-.me {
-  height: 2.5vh;
-  width: 5vw;
-  background-color: white;
-  border: 1px solid;
-  margin-top: 85vh;
 }
