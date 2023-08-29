@@ -12,4 +12,30 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  font-family: josefin sans;
+}
+.score-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #000;
+  color: #FFF;
+  padding: 0.5rem;
+  margin-bottom: 1px ;
+  gap: 1rem;
+  width: 400px;
+  font-size: 1.5rem;
+}
+.score-card div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.computer-score .score {
+  color: #6eebb2;
+}
+.player-score .score {
+  color: #ff0019;
 }

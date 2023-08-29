@@ -1,6 +1,9 @@
 const canvas = document.getElementById("pong");
 const context = canvas.getContext("2d");
-
+const playerScore = document.querySelector(".player-score .score");
+const computerScore = document.querySelector(".computer-score .score");
+var playerScoreCount = 0;
+var computerScoreCount = 0;
 function getRandomInt(min, max) { // The maximum is exclusive and the minimum is inclusive
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -74,31 +77,51 @@ function draw()
 
 draw();
 
-function wallCollision()
-{
-  // ball's collision with top and bottom walls
-  if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height)
+  function resetBall() {
+    ball.x = canvas.width/2;
+    ball.y = canvas.height/2;
+    // add logic to make the game unpredictable; we will be varying speed and it's direction
+    let v = getRandomInt(1, 3); // produces randomly 1 or 2
+    let n = randomG(); // produces randomly 1 or -1
+    ball.dx = n*v;
+    ball.dy = -1*n*v;
+  }
+  function updateScore(element) {
+    if(element == playerScore) {
+      playerScoreCount++;
+      playerScore.innerHTML = playerScoreCount;
+    } else if (element == computerScore) {
+      computerScoreCount++;
+      computerScore.innerHTML = computerScoreCount;
+    }
+  }
+  
+  
+  function wallCollision()
+  {
+    // ball's collision with top and bottom walls
+    if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height)
     {
       //changing the direction aka bouncing
       ball.dy *= -1;
     }
-  // ball's collision with right and left walls; update score & reset
-  if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width)
+    // ball's collision with right and left walls; update score & reset
+    if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width)
     {
-      ball.x = canvas.width/2;
-      ball.y = canvas.height/2;
-      // add logic to make the game unpredictable; we will be varying speed and it's direction
-      let v = getRandomInt(1, 3); // produces randomly 1 or 2
-      let n = randomG(); // produces randomly 1 or -1
-      ball.dx = n*v;
-      ball.dy = -1*n*v;
-    }
-  // computer paddle's collision with top and bottom walls
-  if (computer.y < 0 || computer.y + computer.height > canvas.height)
-    {
-      computer.speed *= -1;
-    }
-}
+      if (ball.x - ball.radius < 0) {
+        updateScore(computerScore);
+      }
+      if (ball.x + ball.radius > canvas.width){
+        updateScore(playerScore);
+      }
+      resetBall();
+      }
+    // computer paddle's collision with top and bottom walls
+    if (computer.y < 0 || computer.y + computer.height > canvas.height)
+      {
+        computer.speed *= -1;
+      }
+  }
 
 function ballPaddleCollision()
 {
